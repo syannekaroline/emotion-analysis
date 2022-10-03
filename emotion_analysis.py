@@ -24,6 +24,7 @@ nltk.download('stopwords')
 
 
 def open_dataset(dataset_name, dataset_type):
+    '''função que retorna um dataframe baseado no arquivo(dataset_name) csv ou xlsx(definido no parâmetro dataset_type) '''
     if dataset_type == 'excel' or 'xlsx':
         df = pd.read_excel(str(dataset_name))
         return df
@@ -31,24 +32,34 @@ def open_dataset(dataset_name, dataset_type):
         df = pd.read_excel(str(dataset_name))
         return df
 
+#pré-processamento
 def remove_characters(txt):
+    '''Função que recebe um texto e retorna-o retirando os caracteres presentes no string.punctuation(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)'''
     sc = [k for k in txt.lower() if k not in string.punctuation]
     sc_ = ''.join(sc)
     return sc_
 
 def remove_accents(txt):
+    """Função que recebe como parâmetro um texto e retira os acentos"""
     return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII')
 
 def tokenize(txt):
+    '''função que divide uma string em substrings usando uma expressão regular que corresponde a caracteres de palavras Unicode'''
     return RegexpTokenizer('\w+').tokenize(txt)
 
 def untokenize(txt):
     return (' ').join(i for i in txt if len(i)>2)
+#print(tokenize("téste remoção de acentos!!!1234!ah tudo bem"))
+#print(untokenize(tokenize("téste remoção de acentos!!!1234")))
+#não entendi o pq da função untokenize--> peruntar ao douglas
+
 
 def remove_stopwords(txt):
+    '''Função que recebe como parâmetro um texto e retira as stopwords por meio de métodos da biblioteca nltk'''
     return [w for w in txt if w not in nltk.corpus.stopwords.words('portuguese')]
 
 def stemming(txt):
+    '''Função que recebe como parâmetro um texto e retorna o mesmo após o processo de stemmentização (reduz a palavra ao seu radical)'''
     return (' ').join([nltk.stem.RSLPStemmer().stem(i) for i in txt.split()])
 
 def simple_train(classifier_name, X, y):
