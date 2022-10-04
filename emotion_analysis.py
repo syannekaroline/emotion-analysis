@@ -62,6 +62,9 @@ def stemming(txt):
     '''Função que recebe como parâmetro um texto e retorna o mesmo após o processo de stemmentização (reduz a palavra ao seu radical)'''
     return (' ').join([nltk.stem.RSLPStemmer().stem(i) for i in txt.split()])
 
+
+#trinamento 
+
 def simple_train(classifier_name, X, y):
     if classifier_name == 'NB':
         clf = MultinomialNB().fit(X, y)

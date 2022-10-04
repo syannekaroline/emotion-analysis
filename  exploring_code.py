@@ -8,6 +8,7 @@ from nltk.tokenize import RegexpTokenizer
 from collections import Counter
 from unicodedata import normalize
 
+import spacy
 import pandas as pd
 import nltk
 import numpy as np
@@ -26,7 +27,7 @@ df = emotion_analysis.open_dataset('dataset.xlsx', 'xlsx')
 df.Emoção = df.Emoção.str.lower()
 
 print("\033[33m \nAntes do pré-processamnto \033[m \n")
-print(df.head())
+print(df.head(20))
 
 df.Comentarios = df.Comentarios.apply(emotion_analysis.remove_characters)
 print("\n\033[33mApós a remoção de caracteres do string punctuation \033[m \n")
@@ -45,4 +46,5 @@ print("\n\033[33mApós a destokentização \033[m \n")
 print(df.head())
 df.Comentarios = df.Comentarios.apply(emotion_analysis.stemming)
 print("\n\033[33mApós a stemmentização \033[m \n")
-print(df.head())
+print(df.head(20))
+
