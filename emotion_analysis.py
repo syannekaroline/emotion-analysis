@@ -53,10 +53,15 @@ def untokenize(txt):
 #print(untokenize(tokenize("téste remoção de acentos!!!1234")))
 #não entendi o pq da função untokenize--> peruntar ao douglas
 
-
 def remove_stopwords(txt):
     '''Função que recebe como parâmetro um texto e retira as stopwords por meio de métodos da biblioteca nltk'''
-    return [w for w in txt if w not in nltk.corpus.stopwords.words('portuguese')]
+    StopWords= nltk.corpus.stopwords.words('portuguese')
+
+    PlusStopWords=["jogo","joguinho","jogar","jogaco","jogabilidade","joguei","nao","historia","historias","voce","coisas","games","game",
+                                                "fazer","trilha","sonora","ter","coada","jogos","pra","faz",
+                                                "porem","que","mas","com"]
+    for p in PlusStopWords : StopWords.append(p)
+    return [w for w in txt if w not in StopWords]
 
 def stemming(txt):
     '''Função que recebe como parâmetro um texto e retorna o mesmo após o processo de stemmentização (reduz a palavra ao seu radical)'''
@@ -112,6 +117,7 @@ def cv_train(classifier_name, X, y, n_fold=5):
         return clf
 
 def vectorizer(X, vec_type):
+    ''' '''
     if vec_type == 'countvectorizer':
         CountVec = CountVectorizer()
         numeric_matrix = CountVec.fit_transform(X)
