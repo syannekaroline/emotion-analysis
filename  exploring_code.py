@@ -23,8 +23,8 @@ nltk.download('rslp')
 nltk.download('stopwords')
 plt.style.use('seaborn')
 
-df = emotion_analysis.open_dataset('dataset.xlsx', 'xlsx')
-df.Emoção = df.Emoção.str.lower()
+#df = emotion_analysis.open_dataset('dataset.xlsx', 'xlsx')
+'''df.Emoção = df.Emoção.str.lower()
 
 print("\033[33m \nAntes do pré-processamnto \033[m \n")
 print(df.head(20))
@@ -46,5 +46,22 @@ print("\n\033[33mApós a destokentização \033[m \n")
 print(df.head())
 df.Comentarios = df.Comentarios.apply(emotion_analysis.stemming)
 print("\n\033[33mApós a stemmentização \033[m \n")
-print(df.head(20))
+print(df.head(20)) '''
 
+#######################Comparação das Stopwords###############################
+
+with open('stoplist_portugues.txt') as f:
+    content = f.readlines()
+content = [x.rstrip('\n') for x in content] 
+#print(content)
+
+StopWords= nltk.corpus.stopwords.words('portuguese')
+
+PlusStopWords=["jogo","joguinho","jogar","jogaco","jogabilidade","joguei","nao","historia","historias","voce","coisas","games","game",
+                                            "fazer","trilha","sonora","ter","coada","jogos","pra","faz",
+                                            "porem","que","mas","com"]
+for p in PlusStopWords : StopWords.append(p)
+
+for word in content:
+    if word not in PlusStopWords :
+        print(word)

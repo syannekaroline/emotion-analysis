@@ -57,10 +57,20 @@ def remove_stopwords(txt):
     '''Função que recebe como parâmetro um texto e retira as stopwords por meio de métodos da biblioteca nltk'''
     StopWords= nltk.corpus.stopwords.words('portuguese')
 
+    #####Adicionando mais stopwords do leonardo e algumas variações delas #####################
     PlusStopWords=["jogo","joguinho","jogar","jogaco","jogabilidade","joguei","nao","historia","historias","voce","coisas","games","game",
                                                 "fazer","trilha","sonora","ter","coada","jogos","pra","faz",
                                                 "porem","que","mas","com"]
+    
+    ####### Adicionando as Stopwords prof.Paula (UFLA)
+
+    with open('stoplist_portugues.txt') as f:
+        Stoplist = f.readlines()
+        Stoplist = [x.rstrip('\n') for x in Stoplist]
+    
     for p in PlusStopWords : StopWords.append(p)
+    for p in Stoplist : StopWords.append(p)
+
     return [w for w in txt if w not in StopWords]
 
 def stemming(txt):
