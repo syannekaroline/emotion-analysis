@@ -91,7 +91,7 @@ def simple_train(classifier_name, X, y):
         clf = KNeighborsClassifier(n_neighbors = 3).fit(X, y)
         return clf
 
-def cv_train(classifier_name, X, y, n_fold=5):
+def cv_train(classifier_name, X, y, n_fold=4):
     if classifier_name == 'NB':
         clf = GridSearchCV(estimator  = MultinomialNB(),
                            param_grid = {'alpha': [0.001,0.01,0.1,1,10,100,1000],
